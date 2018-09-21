@@ -1,0 +1,16 @@
+<% include partials/header %>
+<h1>CampGroup's List</h1>
+
+<ul>
+    
+    <% camps.forEach(camp => { %>
+        <div>
+            <li>
+                <h4><%= camp.name %></h4>
+                <img src="<%= camp.image %>">
+            </li>
+        </div>
+    <% }) %>
+    
+</ul>
+<% include partials/footer %>
