@@ -1,0 +1,28 @@
+{
+  "name": "yelpcamp",
+  "version": "1.0.0",
+  "description": "A project developed throught the Web Development Bootcamp on Udemy, the shows information about some good (and fake) places you should visit.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sauloarth/YelpCamp.git"
+  },
+  "keywords": [
+    "camp",
+    "javascript",
+    "learningcode"
+  ],
+  "author": "Saulo Reis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sauloarth/YelpCamp/issues"
+  },
+  "homepage": "https://github.com/sauloarth/YelpCamp#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
+  }
+}
