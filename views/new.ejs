@@ -1,0 +1,12 @@
+<% include partials/header %>
+<h1>Insert a New Camp</h1>
+<div class="container">
+    <form action="/campgroups" method="POST">
+        <label for="name">Camp Name:</label>
+        <input type="text" name="name" placeholder="Camp Name">
+        <label for="image">Image URL:</label>
+        <input type="text" name="image" placeholder="Image URL">
+        <input type="submit" value="Save">
+    </form>
+</div>
+<% include partials/footer %>

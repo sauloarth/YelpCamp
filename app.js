@@ -1,5 +1,8 @@
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.urlencoded({extended:true}));
 
 let camps = [
         {name:"PachaMama Camping", image: "https://media-cdn.tripadvisor.com/media/photo-s/0f/58/8f/89/area-de-camping-com-vista.jpg"},
@@ -15,6 +18,20 @@ app.get("/", function(req, res){
 
 app.get("/campgroups", function(req, res){
     res.render("campgroups", {camps:camps})
+})
+
+app.post("/campgroups", function(req, res){
+    const newCampName = req.body.name;
+    const newCampImage = req.body.image;
+    const newCamp = {name:newCampName, image: newCampImage};
+    
+    camps.push(newCamp);
+    
+    res.redirect("/campgroups");
+})
+
+app.get("/campgroups/new", function(req, res){
+    res.render("new");
 })
 
 app.listen(process.env.PORT, process.env.IP,function(){
