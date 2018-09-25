@@ -9,7 +9,8 @@ app.use(bodyParser.urlencoded({extended:true}));
     
 const campgroundSchema = mongoose.Schema({
     name: String,
-    image: String
+    image: String,
+    description: String
 })
 
 const Campground = mongoose.model("Campground", campgroundSchema);
@@ -34,7 +35,14 @@ app.get("/campgroups", function(req, res){
 app.post("/campgroups", function(req, res){
     const newCampName = req.body.name;
     const newCampImage = req.body.image;
-    const newCamp = new Campground({name:newCampName, image: newCampImage});
+    const newCampDesc = req.body.desc;
+    const newCamp = new Campground({
+        name:newCampName, 
+        image: newCampImage, 
+        description: newCampDesc
+        
+    });
+        
     Campground.create(newCamp, function(err, result){
         if(err){
             console.log("Something went wrong!");
@@ -49,6 +57,17 @@ app.post("/campgroups", function(req, res){
 
 app.get("/campgroups/new", function(req, res){
     res.render("new");
+})
+
+app.get("/campgroups/:id", function(req, res) {
+    Campground.findById(req.params.id, function(err, result){
+        if(err){
+            console.log("Was impossible find the camp.");
+        } else {
+            res.render("show", {foundCamp: result});
+            console.log("Camp found and returned.");
+        }
+    })
 })
 
 
