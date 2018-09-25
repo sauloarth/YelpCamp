@@ -21,18 +21,18 @@ app.get("/", function(req, res){
     res.render("landing");
 })
 
-app.get("/campgroups", function(req, res){
+app.get("/campgrounds", function(req, res){
     Campground.find({}, function(err, results) {
         if(err){
             console.log("Something went wrong!");
         } else {
-            console.log("Listing all campgroups...");
-            res.render("campgroups", {camps:results})
+            console.log("Listing all campgrounds...");
+            res.render("index", {camps:results})
         }
     })
 })
 
-app.post("/campgroups", function(req, res){
+app.post("/campgrounds", function(req, res){
     const newCampName = req.body.name;
     const newCampImage = req.body.image;
     const newCampDesc = req.body.desc;
@@ -52,14 +52,14 @@ app.post("/campgroups", function(req, res){
         }
     });
     
-    res.redirect("/campgroups");
+    res.redirect("/campgrounds");
 })
 
-app.get("/campgroups/new", function(req, res){
+app.get("/campgrounds/new", function(req, res){
     res.render("new");
 })
 
-app.get("/campgroups/:id", function(req, res) {
+app.get("/campgrounds/:id", function(req, res) {
     Campground.findById(req.params.id, function(err, result){
         if(err){
             console.log("Was impossible find the camp.");
