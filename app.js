@@ -2,24 +2,26 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const Campground = require("./models/campgrounds.js");
+const seedDB = require("./seed.js");
+
 
 mongoose.connect("mongodb://localhost/yelpcamp")
 app.use(bodyParser.urlencoded({extended:true}));
 
+//Seeding data base
+seedDB();
     
-const campgroundSchema = mongoose.Schema({
-    name: String,
-    image: String,
-    description: String
-})
-
-const Campground = mongoose.model("Campground", campgroundSchema);
 
 app.set("view engine", "ejs");
 
 app.get("/", function(req, res){
     res.render("landing");
 })
+
+// =====================
+// CAMPGROUNDS ROUTES
+// =====================
 
 app.get("/campgrounds", function(req, res){
     Campground.find({}, function(err, results) {
@@ -60,15 +62,23 @@ app.get("/campgrounds/new", function(req, res){
 })
 
 app.get("/campgrounds/:id", function(req, res) {
-    Campground.findById(req.params.id, function(err, result){
-        if(err){
-            console.log("Was impossible find the camp.");
-        } else {
-            res.render("show", {foundCamp: result});
-            console.log("Camp found and returned.");
-        }
-    })
+    Campground.findById(req.params.id) 
+        .populate("comments") //name of property on campground schema
+        .exec(function(err, result){
+            if(err){
+                console.log("Was impossible find the camp.");
+            } else {
+                console.log(result)
+                res.render("show", {foundCamp: result});
+                console.log("Camp found and returned.");
+            }
+        })
 })
+
+// =====================
+// COMMENTS ROUTES
+// =====================
+
 
 
 app.listen(process.env.PORT, process.env.IP,function(){
