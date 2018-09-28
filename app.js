@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const Campground = require("./models/campgrounds.js");
+const Comment = require("./models/comment");
 const seedDB = require("./seed.js");
 
 
@@ -19,9 +20,9 @@ app.get("/", function(req, res){
     res.render("landing");
 })
 
-// =====================
-// CAMPGROUNDS ROUTES
-// =====================
+// ==================
+// CAMPGROUND ROUTE'S
+// ==================
 
 app.get("/campgrounds", function(req, res){
     Campground.find({}, function(err, results) {
@@ -29,7 +30,7 @@ app.get("/campgrounds", function(req, res){
             console.log("Something went wrong!");
         } else {
             console.log("Listing all campgrounds...");
-            res.render("index", {camps:results})
+            res.render("campground/index", {camps:results})
         }
     })
 })
@@ -59,7 +60,7 @@ app.post("/campgrounds", function(req, res){
 
 app.get("/campgrounds/new", function(req, res){
     res.render("new");
-})
+});
 
 app.get("/campgrounds/:id", function(req, res) {
     Campground.findById(req.params.id) 
@@ -68,18 +69,45 @@ app.get("/campgrounds/:id", function(req, res) {
             if(err){
                 console.log("Was impossible find the camp.");
             } else {
-                console.log(result)
-                res.render("show", {foundCamp: result});
+                res.render("campground/show", {foundCamp: result});
                 console.log("Camp found and returned.");
             }
-        })
+        });
+});
+
+// ===============
+// COMMENT ROUTE'S
+// ===============
+
+app.get("/campgrounds/:id/comment/new", (req, res) => {
+    Campground.findById(req.params.id, (err, foundCamp) =>{
+        if(err) {
+            console.log(err);
+        }
+        else {
+            res.render("comment/new", {campground:foundCamp});
+        }
+    });
+    
+});
+
+app.post("/campgrounds/:id/comment", (req, res) => {
+    Campground.findById(req.params.id, (err, foundCamp) => {
+        if(err){
+            console.log(err);
+        } else {
+            Comment.create(req.body.comment, (err, createdComment) => {
+                if(err){
+                    console.log(err);
+                } else {
+                    foundCamp.comments.push(createdComment);
+                    foundCamp.save();
+                    res.redirect("/campgrounds/" + foundCamp.id);
+                }
+            })
+        }
+    })
 })
-
-// =====================
-// COMMENTS ROUTES
-// =====================
-
-
 
 app.listen(process.env.PORT, process.env.IP,function(){
     console.log("YelpCamp server is working just fine!");
