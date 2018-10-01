@@ -1,15 +1,25 @@
+//app require
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+
+//passport require
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+
+//models require
 const Campground = require("./models/campgrounds.js");
 const Comment = require("./models/comment");
+const User = require("./models/user.js");
 const seedDB = require("./seed.js");
 
-
+//config app
 mongoose.connect("mongodb://localhost/yelpcamp")
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname + "/public"));
+
+//config passport
 
 //Seeding data base
 seedDB();
