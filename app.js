@@ -169,6 +169,11 @@ app.post("/login",
     
 }) ;
 
+app.get("/logout", (req, res) => {
+    req.logout();
+    res.redirect("/campgrounds");
+})
+
 
 
 app.listen(process.env.PORT, process.env.IP,function(){
