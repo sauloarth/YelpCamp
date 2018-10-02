@@ -14,7 +14,7 @@ router.get("/", function(req, res){
     })
 })
 
-router.post("/", function(req, res){
+router.post("/", isLoggedIn, function(req, res){
     const newCampName = req.body.name;
     const newCampImage = req.body.image;
     const newCampDesc = req.body.desc;
@@ -37,7 +37,7 @@ router.post("/", function(req, res){
     res.redirect("/campgrounds");
 })
 
-router.get("/new", function(req, res){
+router.get("/new", isLoggedIn, function(req, res){
     res.render("campground/new");
 });
 
