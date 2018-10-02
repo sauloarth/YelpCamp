@@ -21,7 +21,11 @@ router.post("/", isLoggedIn, function(req, res){
     const newCamp = new Campground({
         name:newCampName, 
         image: newCampImage, 
-        description: newCampDesc
+        description: newCampDesc,
+        author: {
+            id: req.user.id,
+            username: req.user.username
+        }
         
     });
         
