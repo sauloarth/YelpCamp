@@ -9,10 +9,10 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 
 //models require
-const Campground = require("./models/campgrounds.js");
+const Campground = require("./models/campgrounds");
 const Comment = require("./models/comment");
-const User = require("./models/user.js");
-const seedDB = require("./seed.js");
+const User = require("./models/user");
+const seedDB = require("./seed");
 
 
 //routes require
@@ -47,8 +47,8 @@ app.use((req, res, next) => {
 seedDB();
     
 app.use(indexRoutes);
-app.use(campgroundRoutes);
-app.use(commentRoutes);
+app.use("/campgrounds", campgroundRoutes);
+app.use("/campgrounds/:id/comments", commentRoutes);
 
 
 app.listen(process.env.PORT, process.env.IP,function(){

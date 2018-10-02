@@ -3,7 +3,7 @@ const router = express.Router();
 const Campground = require("../models/campgrounds.js");
 
 
-router.get("/campgrounds", function(req, res){
+router.get("/", function(req, res){
     Campground.find({}, function(err, results) {
         if(err){
             console.log("Something went wrong!");
@@ -14,7 +14,7 @@ router.get("/campgrounds", function(req, res){
     })
 })
 
-router.post("/campgrounds", function(req, res){
+router.post("/", function(req, res){
     const newCampName = req.body.name;
     const newCampImage = req.body.image;
     const newCampDesc = req.body.desc;
@@ -37,11 +37,11 @@ router.post("/campgrounds", function(req, res){
     res.redirect("/campgrounds");
 })
 
-router.get("/campgrounds/new", function(req, res){
-    res.render("new");
+router.get("/new", function(req, res){
+    res.render("campground/new");
 });
 
-router.get("/campgrounds/:id", function(req, res) {
+router.get("/:id", function(req, res) {
     Campground.findById(req.params.id) 
         .populate("comments") //name of property on campground schema
         .exec(function(err, result){
