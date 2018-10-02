@@ -44,7 +44,7 @@ app.use((req, res, next) => {
 
 
 //Seeding data base
-seedDB();
+//seedDB();
     
 app.use(indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
