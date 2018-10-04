@@ -21,7 +21,7 @@
                     <p><em>Submitted By <%= foundCamp.author.username %> </em></p>
                     <% if(currentUser && foundCamp.author.id.equals(currentUser.id)){ %>
                         <a class="btn btn-warning" href="/campgrounds/<%= foundCamp.id %>/edit">Edit Campground</a>
-                        <form id="delete-form" action="/campgrounds/<%= foundCamp.id %>?_method=DELETE" method="POST">
+                        <form class="delete-form" action="/campgrounds/<%= foundCamp.id %>?_method=DELETE" method="POST">
                             <button class="btn btn-danger">Delete</button>
                         </form>
                     <% } %>
@@ -42,6 +42,10 @@
                                </span>
                                     <p>"<%=comment.text%>"</p> 
                             </p>
+                            <a class="btn btn-xs btn-warning" href="/campgrounds/<%= foundCamp.id %>/comments/<%= comment.id %>/edit">Edit</a>
+                            <form class="delete-form" action="/campgrounds/<%= foundCamp.id %>/comments/<%= comment.id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-xs btn-danger">Delete</button>
+                            </form>
                         </div>
                     </div>
                 <% }) %>
