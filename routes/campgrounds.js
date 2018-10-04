@@ -58,6 +58,26 @@ router.get("/:id", function(req, res) {
         });
 });
 
+router.get("/:id/edit", isLoggedIn, function(req, res) {
+    Campground.findById(req.params.id, function(err, foundCamp){
+        if(err){
+            console.log(err);
+        } else{
+            res.render("campground/edit", {campground: foundCamp});
+        }
+    });
+});
+
+router.put("/:id", isLoggedIn, function(req, res){
+    Campground.findByIdAndUpdate(req.params.id, req.body.campground, function(err, updatedCamp){
+        if(err){
+            console.log(err);
+        } else{
+            res.redirect("/campgrounds/" + req.params.id);
+        }
+    })
+})
+
 //Middlewares
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){

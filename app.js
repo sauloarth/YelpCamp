@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const methodOverride = require("method-override");
 
 //passport require
 const passport = require("passport");
@@ -25,6 +26,7 @@ app.set("view engine", "ejs");
 mongoose.connect("mongodb://localhost/yelpcamp")
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname + "/public"));
+app.use(methodOverride("_method"));
 
 //config passport
 app.use(require("express-session")({
