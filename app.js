@@ -1,6 +1,7 @@
 //app require
 const express = require("express");
 const app = express();
+const config = require('config');
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
@@ -23,7 +24,7 @@ const indexRoutes = require("./routes/index.js");
 
 //config app
 app.set("view engine", "ejs");
-mongoose.connect("mongodb://localhost/yelpcamp")
+mongoose.connect(config.get('DB.dbUrl'), {useNewUrlParser: true,useUnifiedTopology: true})
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
@@ -52,7 +53,8 @@ app.use(indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
+const port = process.env.PORT || 3000
 
-app.listen(process.env.PORT, process.env.IP,function(){
+app.listen(port, function(){
     console.log("YelpCamp server is working just fine!");
 });
