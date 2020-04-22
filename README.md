@@ -6,9 +6,10 @@ Visite e experimente: https://bit.ly/sabre-yelpcamp
 ### tecnologias utilizadas
 - node.js
 - express.js
-- mongodb (mongoose)
+- mongodb (atlas)
 - passport
 - ejs
+- aws (EC2, SSH ...)
 
 ### principais aprendizados
 - utilização de template language (ejb), alguns de seus benefícios e problemas
@@ -19,3 +20,7 @@ Visite e experimente: https://bit.ly/sabre-yelpcamp
 - CRUD com mongo
 - utilizando middlewares (autenticação)
 - recebendo dados da requisição com bodyParser e req.params
+- utilizar o config (npm module) para utilizar informações setadas dentro das variáveis de ambiente dentro da aplicação
+- configurar aplicação para utilizar banco de dados Mongo no serviço Atlas
+- criar maquinas virtuais no EC2 da AWS, acessá-la via SSH, iniciar aplicação dentro do serviço da Amazon...
+
