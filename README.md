@@ -1,7 +1,7 @@
 # Descrição
 
 Repositório de lugares para acampar. Você pode cadastrar um lugar de acampamentos que tenha visitado e gostado, além de conseguir inserir uma descrição e uma foto do local. Outras pessoas podem avaliar sua contribuição.
-Visite e experimente: https://bit.ly/sabre-yelpcamp
+Visite e experimente pelo link do website
 
 ### tecnologias utilizadas
 - node.js
